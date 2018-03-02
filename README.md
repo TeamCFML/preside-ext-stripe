@@ -1,0 +1,2 @@
+# PresideCMS Extension: Stripe
+
