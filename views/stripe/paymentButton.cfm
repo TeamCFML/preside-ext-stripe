@@ -13,4 +13,7 @@
 		</cfif>
 	</cfloop>
 	>#buttonLabel#</button>
+	<cfif Len( Trim( args.amount_field ?: "" ) )>
+		<div class="error"></div>
+	</cfif>
 </cfoutput>
