@@ -1,5 +1,5 @@
 <cfscript>
-	possibleArgs  = [ "image", "name", "description", "amount", "locale", "currency", "panelLabel", "zipCode", "billingAddress", "shippingAddress", "email", "labelOnly", "allowRememberMe", "bitcoin", "alipay", "alipayReusable" ];
+	possibleArgs  = [ "image", "name", "description", "amount", "amount_field", "locale", "currency", "panelLabel", "zipCode", "billingAddress", "shippingAddress", "email", "labelOnly", "allowRememberMe", "bitcoin", "alipay", "alipayReusable" ];
 	buttonName    = args.buttonName    ?: "";
 	buttonClass   = args.buttonClass   ?: "";
 	buttonLabel   = args.buttonLabel   ?: "";

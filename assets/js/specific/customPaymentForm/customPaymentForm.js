@@ -41,8 +41,32 @@
 			paymentDialogHandler = createHandler( options );
 
 			$paymentFormButton.on( "click", function( e ){
-				paymentDialogHandler.open();
 				e.preventDefault();
+
+				var dynamicOptions = {};
+
+				if ( typeof buttonData.amount_field !== "undefined" ) {
+					var $amountField = $form.find( "[name=" + buttonData.amount_field + "]" );
+
+					if ( !$amountField.length ) {
+						console.log( "COULD NOT FIND: " + buttonData.amount_field );
+						return;
+					}
+
+						dynamicOptions.amount = parseInt( parseFloat( $amountField.val() ) * 100 );
+					try {
+					} catch ( e ) {
+						console.log( "")
+						return;
+					}
+
+					if ( isNaN( dynamicOptions.amount ) ) {
+						console.log( dynamicOptions );
+						return;
+					}
+				}
+
+				paymentDialogHandler.open( dynamicOptions );
 			} );
 
 			$( window ).on( 'popstate', function() {
