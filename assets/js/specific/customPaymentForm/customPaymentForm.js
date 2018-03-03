@@ -12,6 +12,7 @@
 		return this.each( function(){
 			var $paymentFormButton = $( this )
 			  , $form              = $paymentFormButton.closest( 'form' )
+			  , $error             = $paymentFormButton.next( ".error" )
 			  , buttonData         = $paymentFormButton.data()
 			  , options            = {}
 			  , possibleOptions    = [ "image", "name", "description", "amount", "locale", "currency", "panelLabel", "zipCode", "billingAddress", "shippingAddress", "email", "labelOnly", "allowRememberMe", "bitcoin", "alipay", "alipayReusable" ]
@@ -49,22 +50,24 @@
 					var $amountField = $form.find( "[name=" + buttonData.amount_field + "]" );
 
 					if ( !$amountField.length ) {
-						console.log( "COULD NOT FIND: " + buttonData.amount_field );
+						$error.html( "<p>Could not find amount field, " + buttonData.amount_field + "</p>" );
 						return;
 					}
 
-						dynamicOptions.amount = parseInt( parseFloat( $amountField.val() ) * 100 );
 					try {
+						dynamicOptions.amount = parseInt( parseFloat( $amountField.val() ) * 100 );
 					} catch ( e ) {
-						console.log( "")
+						$error.html( "<p>Invalid amount. Please enter a valid payment amount.</p>" );
 						return;
 					}
 
 					if ( isNaN( dynamicOptions.amount ) ) {
-						console.log( dynamicOptions );
+						$error.html( "<p>Invalid amount. Please enter a valid payment amount.</p>" );
 						return;
 					}
 				}
+
+				$error.html( "" );
 
 				paymentDialogHandler.open( dynamicOptions );
 			} );
